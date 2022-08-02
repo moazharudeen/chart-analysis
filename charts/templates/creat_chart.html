@@ -1,0 +1,121 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <form action="" method="post" >
+              <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" >
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                  <span class="fs-4">{{chart_type}}</span>
+                </a>
+                <hr>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="text" name="config" value="1" hidden>
+                    <div class="mb-3">
+                        <label  class="form-label">chart_title</label>
+                        <input type="text" class="form-control" name="chart_title" placeholder="chart title">
+                      </div>
+                      <div class="mb-3">
+                        <label  class="form-label">chart_sub_title</label>
+                        <input type="text" class="form-control" name="chart_sub_title" placeholder="chart sub title">
+                      </div>
+                      <div class="mb-3">
+                        <label  class="form-label">x_axis_name</label>
+                        <input type="text" class="form-control" name="x_axis_name" placeholder="x axis name">
+                      </div>
+                      <div class="mb-3">
+                        <label  class="form-label">y_axis_name</label>
+                        <input type="text" class="form-control" name="y_axis_name" placeholder="y axis name">
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-6">
+                            <label  class="form-label">x_axis</label>
+                            <select class="form-select"  name="x_axis">
+                              {% for i in fields %}
+                                <option value="{{i}}">{{i}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <div class="col-6">
+                            <label  class="form-label">y_axis</label>
+                            <select class="form-select"  name="y_axis">
+                              {% for i in fields %}
+                                <option value="{{i}}">{{i}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-6">
+                            <label  class="form-label">number_suffix</label>
+                            <input type="text" class="form-control" name="number_suffix" placeholder="number_suffix">
+                            
+                          </div>
+                          <div class="col-6">
+                            <label  class="form-label">aggregation method </label>
+                            <select class="form-select"  name="aggregation">
+                              {% for i in aggregate_functions %}
+                                <option value="{{i}}">{{i}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">create</button>
+                      </div>
+                      
+                </form>
+           
+                
+              </div>
+            </form>
+            
+          </div>
+          <div class="col-md-8">
+            <div class="row" style="margin-top: 50px;">
+              <div style=" overflow: auto;">
+                <div style="float: right;">
+                  
+                    <button class="btn btn-primary" type="button" style="width: 100px; margin-bottom: 50px; " id="#save" onclick="savefunction()">save</button>
+               
+                  
+                </div>
+              </div>
+              
+              
+
+            </div>
+            <div class="row">{{ script|safe }}</div>
+            
+          </div>
+          {{data}}
+        </div>
+    </div>
+    <input type="text" name="" id="script_text" hidden value="{{script}}">
+
+
+
+<script>
+function savefunction() {
+  $.ajax({
+    type: "POST",
+				url: '/chart-save/',
+				data: { csrfmiddlewaretoken: '{{ csrf_token }}'},
+        dataType: "text",
+		
+				success: function(data){
+          alert("Save Complete");
+      }
+			});
+}
+</script>
+</script>
+{% endblock %}

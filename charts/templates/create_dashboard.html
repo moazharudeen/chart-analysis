@@ -1,0 +1,100 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <form action="" method="post" >
+              <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" >
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                  <span class="fs-4">create new dashboard</span>
+                </a>
+                <hr>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label  class="form-label">Dashboard Name</label>
+                    <input type="text" class="form-control" name="dashboard_name" placeholder="Enter Your dashboard Name">
+                  </div> 
+                  <hr>
+                    <div id="form_set"></div>
+                     
+                      <br>
+                      <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">create</button>
+                      </div>
+                      
+                </form>
+           
+                
+              </div>
+            </form>
+            
+          </div>
+          <div class="col-md-8">
+            <h3 style="margin-top: 10px;">please select the chart only one time</h3>
+            <div class="row" style="margin-top: 30px;">
+                
+              <div style=" overflow: auto;">
+                <div style="float: right;">
+                    <input class="btn btn-warning" type="button" id="add" value="Add " style="width: 100px; margin-bottom: 50px; "/><span>
+
+                    
+                    <button class="btn btn-primary" type="button" style="width: 100px; margin-bottom: 50px; " id="#save" onclick="savefunction()">save</button>
+                </span>
+                  
+                </div>
+              </div>
+              
+              
+
+            </div>
+            <div class="row">{{ final_script|safe }}</div>
+            
+          </div>
+      
+        </div>
+    </div>
+    <input type="text" name="" id="script_text" hidden value="{{script}}">
+
+
+<script>
+    var num = 1;
+document.getElementById('add').addEventListener("click",addInput);
+function addInput(){
+var newInput = '<div class="mb-3">\
+                        <label  class="form-label">Chart per row</label>\
+                        <select class="form-select"  name="per_row_chart"> \
+                              {% for i in per_row %} \
+                                <option value="{{i}}">{{i}}</option> \
+                              {% endfor %} \
+                            </select>\
+                      </div> \
+                      <div class="mb-3">\
+                        <label  class="form-label">Chart Name</label>\
+                        <select class="form-select"  name="chart_name"> \
+                              {% for i in charts_name %} \
+                                <option value="{{i}}">{{i}}</option> \
+                              {% endfor %} \
+                            </select>\
+                      </div> <hr>';
+   document.getElementById('form_set').innerHTML += newInput;  
+   num++;
+}
+</script>
+<script>
+function savefunction() {
+  $.ajax({
+    type: "POST",
+				url: '/dashboard-save/',
+				data: { csrfmiddlewaretoken: '{{ csrf_token }}'},
+        dataType: "text",
+		
+				success: function(data){
+          alert("Save Complete");
+      }
+			});
+}
+</script>
+</script>
+{% endblock %}

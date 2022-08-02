@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    {% for i in charts %}
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="dropdown-menu d-block position-static p-2 shadow rounded-3 w-340px" style="margin-top: 40px;">
+            <div class="d-grid gap-1">
+                <h2 class="text-center">{{i.chart_name}}</h2>
+                
+                <hr>
+                {{i.chart_data|safe}}
+                
+                
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="dropdown-menu d-block position-static p-2 shadow rounded-3 w-340px" style="margin-top: 200px;">
+                <div class="d-grid gap-1">
+                    <h2 class="text-center">Select the chart type</h2>
+                    <br>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <select class="form-select"  name="chart_type">
+                            <option value="column2d">column2d</option>
+                            <option value="column3d">column3d</option>
+                            <option value="column4d">column4d</option>
+                          </select>
+                          <br>
+                          <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">proceed</button>
+                          </div>
+                    </form>
+                    
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock %}
