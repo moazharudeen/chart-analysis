@@ -13,9 +13,25 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>chart creation</title>
+    <style>
+      .nav-link{
+    color: white;
+}
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light" >
+  {% if 'dashboard' in request.path and '-dashboard' not in request.path %}
+    <nav class="navbar navbar-expand-lg " style="background-color: #0493AA" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/" style="color: white;">{{ dashboard_name }}</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+        </div>
+      </nav>
+      {% else %}
+      <nav class="navbar navbar-expand-lg " style="background-color: #0493AA">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">azhar's chart creator</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,15 +40,15 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">create</a>
+                <a class="nav-link " aria-current="page" href="/">create</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/chart-list/">all charts</a>
+                <a class="nav-link " aria-current="page" href="/chart-list/">all charts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/create-dashboard/">create dshboard</a>
+                <a class="nav-link " aria-current="page" href="/create-dashboard/">create dshboard</a>
               </li>
-              <li class="nav-item dropdown active">
+              <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   dashboards
                 </a>
@@ -41,13 +57,21 @@
                 </ul>
               </li>
             </ul>
+            {% if request.user.is_authenticated %}
+            <a href="/accounts/logout/" class="btn btn-outline-danger">LOGOUT</a>
+            {% else %}
+            <a href="/accounts/login/" class="btn btn-outline-success">LOGIN</a>
+            {% endif %}
+            <!-- <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Search</button> -->
             <!-- <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              
             </form> -->
           </div>
         </div>
       </nav>
+      {% endif %}
 {% block content %}
 
 {% endblock %}

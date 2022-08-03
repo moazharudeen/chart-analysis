@@ -1,20 +1,71 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<style>
+
+    .nav.nav-tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+}
+.sticky {
+   
+    height: 40px;
+    background-color: #0493AA;
+    position: fixed;
+    margin-top: -40px;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #064D59;
+    z-index: 9998;
+    color: #fff;
+    text-align: right;
+    padding-right: 10px;
+}
+.nav-link{
+    color: white;
+}
+</style>
 <div class="container">
+    <div class="tab-content" id="nav-tabContent">
+        
+        <!-- <!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div> -->
+        <!-- <div class="tab-pane fade" id="main" role="tabpanel" aria-labelledby="sub" tabindex="0">...</div> -->
+        <!-- <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div> --> 
+      
     {% for i in charts %}
+    <div class="tab-pane fade show active" id="main{{i.id}}" role="tabpanel" aria-labelledby="sub{{i.id}}" tabindex="0">
     <div class="row" style="margin-bottom: 20px;">
-        <div class="dropdown-menu d-block position-static p-2 shadow rounded-3 w-340px" style="margin-top: 40px;">
+        <div class="dropdown-menu d-block position-static p-2 shadow rounded-3 w-340px" style="margin-top: 40px; border: 2px solid aqua; border-color: aquamarine;">
             <div class="d-grid gap-1">
-                <h2 class="text-center">{{i.chart_name}}</h2>
                 
-                <hr>
+                
+                
                 {{i.chart_data|safe}}
                 
                 
             </div>
           </div>
     </div>
+</div>
     {% endfor %}
 </div>
+
+
+
+    
+      
+</div>
+
+
+<nav class="sticky">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist" >
+        <button class="nav-link active" id="sub" data-bs-toggle="tab" data-bs-target="#main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">allcharts</button>
+        {% for i in charts %}
+        <button class="nav-link " id="sub{{i.id}}" data-bs-toggle="tab" data-bs-target="#main{{i.id}}" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{{i.chart_name}}</button>
+        {% endfor %}
+
+    </div>
+    </nav>
+
 {% endblock %}

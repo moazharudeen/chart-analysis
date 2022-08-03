@@ -8,11 +8,11 @@ from .models import ChartName, ChartSheet, chartData,Data, data_column, aggregat
 from .forms import charttypeform
 from django.db import connections
 from .chartdata import chart_dict
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required()
 def select_chart(request):
-    
     if request.method == 'POST':
         post_data = dict(request.POST)
         print(post_data)
@@ -24,7 +24,7 @@ def select_chart(request):
                 return redirect('/create-chart/')
     return render(request, 'index.html', {})
 
-        
+@login_required()      
 def create_chart(request):
     
     chart_type = request.session.get('chart_type')
@@ -78,7 +78,7 @@ def create_chart(request):
     }
     return render(request, 'creat_chart.html', context)
 
-
+@login_required()
 def chart_save(request):
     print(request.session.get('script'))
     if request.method == 'POST':
@@ -103,7 +103,7 @@ def chart_save(request):
     }
     return render(request, 'creat_chart.html', context)
 
-
+@login_required()
 def chart_list(request):
     charts = chartData.objects.all()
     context = {
@@ -111,7 +111,7 @@ def chart_list(request):
     }
     return render(request, 'chart_list.html', context)
 
-
+@login_required()
 def create_dashboard(request):
     final_script = ''
     per_row = {
@@ -161,7 +161,7 @@ def create_dashboard(request):
     }
     return render(request, 'create_dashboard.html', context)
 
-
+@login_required()
 def dashboard_save(request):
     per_row = {
         '1':12,
@@ -194,22 +194,18 @@ def dashboard_save(request):
     }
     return render(request, 'create_dashboard.html', context)
 
+@login_required()
 def dashboard_view(request):
     if request.method == 'GET':
         uuid = request.GET.get('id')
         print('uuid', uuid)
         quried_data = dashboard.objects.filter(
             id=uuid
-        ).values_list('dashboard_data', flat=True)
+        ).values_list('dashboard_data', 'dashboard_name')
         print(quried_data)
-        # query = f'select id, dashboard_data from dashboarddata where id="{uuid}"'
-        # print('query', query)
-        # cursor = connections['default'].cursor()
-        # cursor.execute(query)
-        # quried_data = dict(cursor.fetchall())
-        # print(quried_data)
         context = {
-            'data':quried_data[0],
+            'data':quried_data[0][0],
+            'dashboard_name':quried_data[0][1],
             'val':'6e3c71db-3990-45d9-940d-4ebac70f3e4d'
         }
 

@@ -1,6 +1,8 @@
 chart_dict = {
 'column2d' : """
+<div style="margin-top: 40px; border: 3px solid #0493AA; border-radius: 12px;">
 <div id="{6}">chart will show here</div>
+</div>
     <script type="text/javascript">
     //STEP 2 - Chart Data
     var chartData = {0};
