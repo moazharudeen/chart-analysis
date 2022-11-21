@@ -16,6 +16,16 @@
                     <label  class="form-label">Dashboard Name</label>
                     <input type="text" class="form-control" name="dashboard_name" placeholder="Enter Your dashboard Name">
                   </div> 
+                  <div class="mb-3">
+                    <!-- <label  class="form-label">Select Filters</label> -->
+                    <select name="filters" id="id_filters" class="form-control" multiple="multiple" placeholder="Choose some filters...">
+                      {% for i in object_columns %}
+                      <option value="{{i}}">{{i}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                  </div> 
+
                   <hr>
                     <div id="form_set"></div>
                      
@@ -49,6 +59,7 @@
               
 
             </div>
+            {{csrf}}
             <div class="row">{{ final_script|safe }}</div>
             
           </div>
@@ -56,6 +67,7 @@
         </div>
     </div>
     <input type="text" name="" id="script_text" hidden value="{{script}}">
+
 
 
 <script>
@@ -92,9 +104,16 @@ function savefunction() {
 		
 				success: function(data){
           alert("Save Complete");
+          location.assign('/create-dashboard/')
       }
 			});
 }
 </script>
+<script type="text/javascript">
+
+
+  $('#id_filters').selectize();
+
+
 </script>
 {% endblock %}

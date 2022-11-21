@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load tags %}
 {% block content %}
 <style>
 
@@ -25,47 +26,37 @@
 .nav-link{
     color: white;
 }
+
 </style>
-<div class="container">
-    <div class="tab-content" id="nav-tabContent">
-        
-        <!-- <!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div> -->
-        <!-- <div class="tab-pane fade" id="main" role="tabpanel" aria-labelledby="sub" tabindex="0">...</div> -->
-        <!-- <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div> --> 
-      
-    {% for i in charts %}
-    <div class="tab-pane fade show active" id="main{{i.id}}" role="tabpanel" aria-labelledby="sub{{i.id}}" tabindex="0">
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="dropdown-menu d-block position-static p-2 shadow rounded-3 w-340px" style="margin-top: 40px; border: 2px solid aqua; border-color: aquamarine;">
-            <div class="d-grid gap-1">
+<div class="container-fluid">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-4" style="overflow-y: scroll;height: 600px;">
+            <ul class="list-group" >
                 
-                
-                
-                {{i.chart_data|safe}}
-                
-                
-            </div>
-          </div>
-    </div>
-</div>
-    {% endfor %}
-</div>
-
-
-
+              
+                {% for i in charts %}
     
-      
-</div>
+                
+                <li class="list-group-item {% if i.id|types == id_name|types %} active {% endif %}"><a href="/chart-list/?id={{i.id}}"  {% if i.id|types == id_name|types %} style="color: white;" {% endif %}>{{i}}</a></li>
+                
+                {% endfor %}
+              </ul>
+        </div>
+        <div class="col-md-8" style="margin-top: 20px;">
+            {% if single_chart %}
+            {{single_chart|safe}}
 
-
-<nav class="sticky">
-    <div class="nav nav-tabs" id="nav-tab" role="tablist" >
-        <button class="nav-link active" id="sub" data-bs-toggle="tab" data-bs-target="#main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">allcharts</button>
-        {% for i in charts %}
-        <button class="nav-link " id="sub{{i.id}}" data-bs-toggle="tab" data-bs-target="#main{{i.id}}" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{{i.chart_name}}</button>
-        {% endfor %}
-
+            {% else %}
+            <center>
+                <h2>
+                    please select the chart
+                </h2>
+            </center>
+        
+            
+            {% endif %}
+        </div>
     </div>
-    </nav>
+</div>
 
 {% endblock %}

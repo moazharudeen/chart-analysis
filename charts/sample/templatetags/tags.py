@@ -22,3 +22,7 @@ def render_dashboard_tabs(request):
 
     # result = result.replace('open_flower', '{').replace('close_flower', '}')
     return SafeString(result)
+
+@register.filter
+def types(value):
+    return str(value)

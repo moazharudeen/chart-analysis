@@ -1,6 +1,8 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<input type="text" name="id" id="" form="search_form" value="{{id}}" hidden>
+<input type="text" name="filter_status" id="" form="search_form" value="True" hidden>
 <div class="container">
     <div class="row">
 {{data|safe}}

@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class ChartName(models.Model):
@@ -43,7 +44,12 @@ class chartData(models.Model):
          editable = False
          )
      chart_name = models.CharField(max_length=255, db_index=True, blank=True, null=True, db_column='chart_name')
+     chart_query = models.TextField()
      chart_data = models.TextField()
+     user = models.ForeignKey(User, on_delete=models.CASCADE)
+     created_date = models.DateTimeField(auto_now=True)
+     chart_type = models.CharField(max_length=255, db_index=True, blank=True, null=True, db_column='chart_type')
+     filter_chart_data = models.TextField()
 
      class Meta:
         db_table = 'chartdata'
@@ -60,6 +66,8 @@ class dashboard(models.Model):
          )
      dashboard_name = models.CharField(max_length=255, db_index=True, blank=True, null=True, db_column='dashboard_name')
      dashboard_data = models.TextField()
+     filter_dashboard_data = models.TextField()
+     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
      class Meta:
         db_table = 'dashboarddata'
