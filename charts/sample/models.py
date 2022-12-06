@@ -50,6 +50,9 @@ class chartData(models.Model):
      created_date = models.DateTimeField(auto_now=True)
      chart_type = models.CharField(max_length=255, db_index=True, blank=True, null=True, db_column='chart_type')
      filter_chart_data = models.TextField()
+     filter_script_data = models.TextField()
+     javascript_script = models.TextField()
+     chart_unique_id = models.CharField(max_length=255, db_index=True, blank=True, null=True)
 
      class Meta:
         db_table = 'chartdata'

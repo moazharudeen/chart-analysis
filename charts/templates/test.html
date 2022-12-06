@@ -1,106 +1,174 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-  background: darksalmon;
-}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!-- Include fusion theme -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
-.fill {
-  background-image: url('https://source.unsplash.com/random/150x150');
-  position: relative;
-  height: 150px;
-  width: 150px;
-  top: 5px;
-  left: 5px;
-  cursor: pointer;
-}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" ></script>
 
-.hold {
-  border: solid 5px #ccc;
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js"></script> -->
+<style>
+      .nav-link{
+    color: white;
 }
-
-.empty {
-  display: inline-block;
-  height: 160px;
-  width: 160px;
-  margin: 10px;
-  border: solid 3px salmon;
-  background: white;
-}
-
-.hovered {
-  background: #f4f4f4;
-  border-style: dashed;
-}
-
     </style>
 </head>
 <body>
-    <div class="empty">
-        <div class="fill" draggable="true"> </div>
-      </div>
-    
-      <div class="empty">
-      </div>
-    
-      <div class="empty">
-      </div>
-    
-      <div class="empty">
-      </div>
-    
-      <div class="empty">
-      </div>
-</body>
-<script>
-    const fill = document.querySelector('.fill');
-const empties = document.querySelectorAll('.empty');
+  
+    <nav class="navbar navbar-expand-lg " style="background-color: #0493AA" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/" style="color: white;">testing</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+        </div>
+      </nav>
+      
 
-// Fill listeners
-fill.addEventListener('dragstart', dragStart);
-fill.addEventListener('dragend', dragEnd);
+<input type="text" name="id" id="" form="search_form" value="12a5d081-2c22-471f-9879-3a23083933ea" hidden>
+<input type="text" name="filter_status" id="" form="search_form" value="True" hidden>
+<div class="container">
+    <div class="row">
+<style>
+      
+    * {
+      box-sizing: border-box;
+    }
+    html, body, [data-gjs-type=wrapper] {
+      min-height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      background-color: #fff
+    }
+    [data-gjs-type=wrapper] {
+      overflow: auto;
+      overflow-x: hidden;
+    }
 
-// Loop through empty boxes and add listeners
-for (const empty of empties) {
-  empty.addEventListener('dragover', dragOver);
-  empty.addEventListener('dragenter', dragEnter);
-  empty.addEventListener('dragleave', dragLeave);
-  empty.addEventListener('drop', dragDrop);
-}
+    * ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1)
+    }
 
-// Drag Functions
+    * ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2)
+    }
 
-function dragStart() {
-  this.className += ' hold';
-  setTimeout(() => (this.className = 'invisible'), 0);
-}
+    * ::-webkit-scrollbar {
+      width: 10px
+    }
+  
 
-function dragEnd() {
-  this.className = 'fill';
-}
+      .gjs-dashed *[data-highlightable] {
+        outline: 1px dashed rgba(170,170,170,0.7);
+        outline-offset: -2px;
+      }
 
-function dragOver(e) {
-  e.preventDefault();
-}
+      .gjs-selected {
+        outline: 3px solid #3b97e3 !important;
+        outline-offset: -3px;
+      }
 
-function dragEnter(e) {
-  e.preventDefault();
-  this.className += ' hovered';
-}
+      .gjs-selected-parent {
+        outline: 2px solid #ffca6f !important
+      }
 
-function dragLeave() {
-  this.className = 'empty';
-}
+      .gjs-no-select {
+        user-select: none;
+        -webkit-user-select:none;
+        -moz-user-select: none;
+      }
 
-function dragDrop() {
-  this.className = 'empty';
-  this.append(fill);
-}
+      .gjs-freezed {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .gjs-no-pointer {
+        pointer-events: none;
+      }
+
+      .gjs-plh-image {
+        background: #f5f5f5;
+        border: none;
+        height: 100px;
+        width: 100px;
+        display: block;
+        outline: 3px solid #ffca6f;
+        cursor: pointer;
+        outline-offset: -2px
+      }
+
+      .gjs-grabbing {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+      }
+
+      .gjs-is__grabbing {
+        overflow-x: hidden;
+      }
+
+      .gjs-is__grabbing,
+      .gjs-is__grabbing * {
+        cursor: grabbing !important;
+      }
+
+      
+      * { box-sizing: border-box; } body {margin: 0;}
+    </style><div data-gjs-type="wrapper" data-highlightable="1" id="wrapper" class=""><div data-gjs-type="default" draggable="true" data-highlightable="1" class="gjs-row" id="ighj"><div data-gjs-type="default" draggable="true" data-highlightable="1" class="gjs-cell" id="ilgr"><div data-gjs-type="default" draggable="true" data-highlightable="1" class="gjs-row" id="iwjn"><div data-gjs-type="default" draggable="true" data-highlightable="1" class="gjs-cell" id="it0h"><div data-gjs-type="default" draggable="true" data-highlightable="1" id="iuyp" class=""><div data-gjs-type="text" draggable="true" data-highlightable="1" id="d00e538c-f97c-4c98-9f3d-e15f6a48fa59" class="">chart will show here</div></div></div><div data-gjs-type="default" draggable="true" data-highlightable="1" class="gjs-cell" id="ip5g"></div></div></div></div></div><div class="gjs-css-rules"><div id="gjs-css-rules"><style>.gjs-row{display:table;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;width:100%;}</style><style>.gjs-cell{width:8%;display:table-cell;height:75px;}</style><style>#iuyp{margin-top:40px;border:3px solid #0493AA;border-radius:12px;}</style></div><div id="gjs-css-rules-992"></div><div id="gjs-css-rules-768"><style>@media (max-width: 768pxpx){.gjs-cell{width:100%;display:block;}}</style><style>@media (max-width: 768pxpx){.gjs-cell30{width:100%;display:block;}}</style><style>@media (max-width: 768pxpx){.gjs-cell70{width:100%;display:block;}}</style></div><div id="gjs-css-rules-480"></div></div><div class="gjs-js-cont"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //STEP 2 - Chart Data
+    var chartData = [{'label': 'Setosa', 'value': 50}, {'label': 'Versicolor', 'value': 50}, {'label': 'Virginica', 'value': 50}];
+
+    //STEP 3 - Chart Configurations
+    var jpGcbMp = flower_open
+    type: 'column2d',
+    renderAt: 'd00e538c-f97c-4c98-9f3d-e15f6a48fa59',
+    width: '100%',
+    height: '400',
+    dataFormat: 'json',
+    dataSource: flower_open
+        // Chart Configuration
+        "chart": flower_open
+            "caption": "title",
+            "subCaption": "sub title",
+            "xAxisName": "varity",
+            "yAxisName": "sepal length",
+            "numberSuffix": "mm",
+            "theme": "fusion",
+            flower_close,
+        // Chart Data
+        "data": chartData
+        flower_close
+    flower_close;
+    FusionCharts.ready(function()flower_open
+    var fusioncharts = new FusionCharts(jpGcbMp);
+    fusioncharts.render();
+    flower_close);
 
 </script>
+    
+
+
+</body>
+
+
 </html>
